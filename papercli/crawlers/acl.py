@@ -5,8 +5,13 @@ from papercli.models import Paper
 
 EVENT_IDS = {
     ("ACL", 2025): "acl-2025",
+    ("ACL", 2024): "acl-2024",
+    ("ACL", 2023): "acl-2023",
     ("EMNLP", 2025): "emnlp-2025",
+    ("EMNLP", 2024): "emnlp-2024",
+    ("EMNLP", 2023): "emnlp-2023",
     ("NAACL", 2025): "naacl-2025",
+    ("NAACL", 2024): "naacl-2024",
 }
 
 

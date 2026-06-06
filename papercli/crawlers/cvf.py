@@ -9,12 +9,16 @@ from papercli.models import Paper
 BASE = "https://openaccess.thecvf.com"
 
 LISTING = {
+    ("CVPR", 2026): f"{BASE}/CVPR2026?day=all",
     ("CVPR", 2025): f"{BASE}/CVPR2025?day=all",
     ("CVPR", 2024): f"{BASE}/CVPR2024?day=all",
+    ("CVPR", 2023): f"{BASE}/CVPR2023?day=all",
     ("ICCV", 2025): f"{BASE}/ICCV2025?day=all",
     ("ICCV", 2023): f"{BASE}/ICCV2023?day=all",
+    ("WACV", 2026): f"{BASE}/WACV2026?day=all",
     ("WACV", 2025): f"{BASE}/WACV2025",
     ("WACV", 2024): f"{BASE}/WACV2024",
+    ("WACV", 2023): f"{BASE}/WACV2023",
 }
 
 

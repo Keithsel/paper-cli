@@ -136,19 +136,19 @@ Tracked status of crawler implementations against the [Cannot-Miss-AI-Conference
 
 ### Conferences
 
-- [ ] **NeurIPS**
+- [x] **NeurIPS**
   - [x] 2025
   - [x] 2024
-  - [ ] 2023
-- [ ] **ICML**
+  - [x] 2023
+- [x] **ICML**
   - [x] 2025
-  - [ ] 2024
-  - [ ] 2023
-- [ ] **ICLR**
+  - [x] 2024
+  - [x] 2023
+- [x] **ICLR**
   - [x] 2026
   - [x] 2025
-  - [ ] 2024
-  - [ ] 2023
+  - [x] 2024
+  - [x] 2023
 - [ ] **AAAI**
   - [ ] 2026
   - [ ] 2025
@@ -159,33 +159,33 @@ Tracked status of crawler implementations against the [Cannot-Miss-AI-Conference
   - [ ] 2025
   - [ ] 2024
   - [ ] 2023
-- [ ] **CVPR**
-  - [ ] 2026
+- [x] **CVPR**
+  - [x] 2026
   - [x] 2025
   - [x] 2024
-  - [ ] 2023
-- [ ] **ICCV**
+  - [x] 2023
+- [x] **ICCV**
   - [x] 2025
   - [x] 2023
 - [ ] **ECCV**
   - [ ] 2024
-- [ ] **WACV**
-  - [ ] 2026
+- [x] **WACV**
+  - [x] 2026
   - [x] 2025
   - [x] 2024
-  - [ ] 2023
-- [ ] **ACL**
+  - [x] 2023
+- [x] **ACL**
   - [x] 2025
-  - [ ] 2024
-  - [ ] 2023
-- [ ] **EMNLP**
+  - [x] 2024
+  - [x] 2023
+- [x] **EMNLP**
   - [x] 2025
-  - [ ] 2024
-  - [ ] 2023
-- [ ] **NAACL**
+  - [x] 2024
+  - [x] 2023
+- [x] **NAACL**
   - [ ] 2026 (combined with ACL)
   - [x] 2025
-  - [ ] 2024
+  - [x] 2024
   - [ ] 2023 (combined with ACL)
 - [ ] **Interspeech**
   - [ ] 2025

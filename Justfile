@@ -8,6 +8,9 @@ lint:
 typecheck:
     uv run ty check
 
+test:
+    uv run pytest
+
 crawl venue year:
     uv run papers crawl {{ venue }} {{ year }}
 
