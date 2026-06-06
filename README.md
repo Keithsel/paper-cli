@@ -9,19 +9,21 @@ A command-line tool to crawl, index, download, and search AI conference and jour
 - Retrieve and store PDFs locally.
 - Export indexed papers to Parquet format.
 
-## Setup
+### Setup
 
 Requires Python 3.12+.
 
 1. Clone the repository.
-2. Install dependencies and set up the virtual environment:
+2. Set up the virtual environment and install dependencies:
 
-   **Using `uv` (Recommended):**
+   With uv:
+
    ```bash
    uv sync
    ```
 
-   **Using standard Python and `pip`:**
+   With pip:
+
    ```bash
    python3 -m venv .venv
    source .venv/bin/activate
@@ -30,85 +32,110 @@ Requires Python 3.12+.
 
 ## Usage
 
-Commands can be run via `uv run papers <command>` or using the helper shortcuts defined in the `Justfile`.
+If you installed using standard Python, activate the virtual environment (`source .venv/bin/activate`) and run commands using `papers <command>`.
+If you installed using `uv sync`, run commands using `uv run papers <command>`.
+If you have `just` installed, you can use the helper shortcuts in the `Justfile`.
 
 ### Supported Venues
 
-The CLI crawls and indexes key publications from the [Cannot-Miss-AI-Conferences-Journals](https://github.com/christian-hoang-04/Cannot-Miss-AI-Conferences-Journals) list:
+The CLI crawls and indexes key publications from the [Cannot-Miss-AI-Conferences-Journals](https://github.com/christian-hoang-04/Cannot-Miss-AI-Conferences-Journals) registry:
 
 - ACL Anthology: `ACL`, `EMNLP`, `NAACL`
 - CVF: `CVPR`, `ICCV`, `WACV`
 - OpenReview: `NeurIPS`, `ICML`, `ICLR`
 
-List registered venues programmatically:
+List registered venues:
+
 ```bash
+papers venues
+# or:
 uv run papers venues
 ```
 
-View supported venue-years vs. indexed counts:
+View venue status and download progress:
+
 ```bash
+papers venue-years
+# or:
 uv run papers venue-years
-# or
+# or:
 just venue-years
 ```
 
 ### Crawling & Indexing
 
 Crawl a specific venue and year:
+
 ```bash
-uv run papers crawl <venue> <year>
+papers crawl <venue> <year>
 # Example:
+papers crawl ACL 2025
+# or:
 uv run papers crawl ACL 2025
-# or
+# or:
 just crawl ACL 2025
 ```
 
 Crawl and index all supported venue-years:
+
 ```bash
+papers index
+# or:
 uv run papers index
-# or
+# or:
 just index
 ```
 
-*Metadata is stored in SQLite at `.paper-cli/papers.db` in the project root.*
+Metadata is stored in SQLite at `.paper-cli/papers.db`.
 
 ### Searching Papers
 
-Search the database (queries title, abstract, and authors):
+Search title, abstract, and authors:
+
 ```bash
-uv run papers search "<query>"
+papers search "<query>"
 # Example:
+papers search "attention mechanism"
+# or:
 uv run papers search "attention mechanism"
-# or
+# or:
 just search "attention mechanism"
 ```
 
 Options:
+
 - `--venue <venue>`: Filter search by venue.
-- `--limit <int>`: Maximum results to display (default: 20).
+- `--limit <int>`: Maximum results (default: 20).
 
 ### Downloading PDFs
 
-Retrieve PDF files for crawled papers to `.paper-cli/pdfs/` in the project root:
+Retrieve PDF files to `.paper-cli/pdfs/`:
+
 ```bash
-uv run papers download [--venue <venue>] [--year <year>] [--delay <seconds>]
+papers download [--venue <venue>] [--year <year>] [--delay <seconds>]
 # Example:
+papers download --venue ACL --year 2025
+# or:
+uv run papers download --venue ACL --year 2025
+# or:
 just download venue="ACL" year="2025"
 ```
 
 ### Exporting Metadata
 
-Export crawled papers to a Parquet file (default: `.paper-cli/papers.parquet` in the project root):
+Export papers to a Parquet file (defaults to `.paper-cli/papers.parquet`):
+
 ```bash
-uv run papers export [out-path]
-# or
+papers export
+# or:
+uv run papers export
+# or:
 just export-parquet
 ```
 
 ### Resolving PDFs
 
-Each row has `pdf_url` (the original source link, always present) and
-`hf_pdf_path` (a path within this dataset, present only for mirrored papers).
+Each row has `pdf_url` (the original source link, always present) and `hf_pdf_path` (a path within this dataset, present only for mirrored papers).
 
 To fetch a mirrored PDF:
 
@@ -122,40 +149,39 @@ path = hf_hub_download(
 )
 ```
 
-If `hf_pdf_path` is null, the PDF isn't mirrored — use `pdf_url` instead.
+If `hf_pdf_path` is null, use `pdf_url` instead.
 
-### Publishing
+### Publishing & Collaboration
 
-Publish the local index and downloaded PDFs to the [`ClosedUni/papercli-papers`](https://huggingface.co/datasets/ClosedUni/papercli-papers) dataset repository (configurable via the `HF_DATASET_SLUG` environment variable):
+To publish indexed papers and downloaded PDFs to the `ClosedUni/papercli-papers` Hugging Face dataset (configured via the `HF_DATASET_SLUG` environment variable):
 
-1. **Authenticate once** (saves token locally):
+1. Authenticate with Hugging Face:
+
    ```bash
-   # If using uv:
-   uv run huggingface-cli login
-   
-   # If using standard Python:
    huggingface-cli login
    ```
-   *Alternatively, set the `HF_TOKEN` environment variable.*
 
-2. **Ensure the desired venue-years are indexed**:
+   Or set the `HF_TOKEN` environment variable.
+
+2. Crawl and index all paper metadata locally:
+
    ```bash
-   # If using uv/just:
-   just index            # or: just crawl NeurIPS 2025
-   
-   # If using standard Python:
    papers index
    ```
 
-3. **Export and Upload**:
+3. (Optional) Download PDFs for the venues/years you want to contribute (e.g. CVPR):
+
    ```bash
-   # If using uv/just:
-   just publish
-   
-   # If using standard Python:
+   papers download --venue CVPR --year 2025   # Specific year
+   papers download --venue CVPR               # All years for CVPR
+   ```
+
+   _Note: The export script checks the remote Hugging Face repository first, so your uploads will merge cleanly with PDFs uploaded by other contributors without overwriting their metadata links._
+
+4. Export and upload to Hugging Face:
+   ```bash
    python scripts/publish.py
    ```
-   This will export the local index to Parquet format, generate per-venue-year browse Parquet files, and upload them alongside any locally downloaded PDFs directly to the Hugging Face dataset repository.
 
 ## Development
 
@@ -249,4 +275,3 @@ Tracked status of crawler implementations against the [Cannot-Miss-AI-Conference
 - [ ] **ACM MM**
   - [ ] 2025
   - [ ] 2024
-
