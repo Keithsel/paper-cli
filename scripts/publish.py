@@ -43,7 +43,7 @@ def build_readme() -> str:
         "- `papers.parquet`: the full dataset (all fields, all venues).",
         "- Per-venue browse views: pick a venue in **Subset**, a year in **Split**.",
         "",
-        "Built with [paper-cli](https://github.com/Keithsel/paper-cli).",
+        "Built with [papercli](https://github.com/Keithsel/papercli).",
     ]
     return "\n".join(lines)
 

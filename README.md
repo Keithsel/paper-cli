@@ -86,7 +86,7 @@ uv run papers index
 just index
 ```
 
-Metadata is stored in SQLite at `.paper-cli/papers.db`.
+Metadata is stored in SQLite at `.papercli/papers.db`.
 
 ### Searching Papers
 
@@ -109,7 +109,7 @@ Options:
 
 ### Downloading PDFs
 
-Retrieve PDF files to `.paper-cli/pdfs/`:
+Retrieve PDF files to `.papercli/pdfs/`:
 
 ```bash
 papers download [--venue <venue>] [--year <year>] [--delay <seconds>]
@@ -123,7 +123,7 @@ just download venue="ACL" year="2025"
 
 ### Exporting Metadata
 
-Export papers to a Parquet file (defaults to `.paper-cli/papers.parquet`):
+Export papers to a Parquet file (defaults to `.papercli/papers.parquet`):
 
 ```bash
 papers export

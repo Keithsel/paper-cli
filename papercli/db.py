@@ -4,7 +4,7 @@ from pathlib import Path
 from papercli.models import Paper
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_DB = PROJECT_ROOT / ".paper-cli" / "papers.db"
+DEFAULT_DB = PROJECT_ROOT / ".papercli" / "papers.db"
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS papers (
