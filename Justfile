@@ -9,10 +9,10 @@ typecheck:
     uv run ty check
 
 crawl venue year:
-    uv run papers crawl {{venue}} {{year}}
+    uv run papers crawl {{ venue }} {{ year }}
 
 search query:
-    uv run papers search "{{query}}"
+    uv run papers search "{{ query }}"
 
 export-parquet:
     uv run papers export
@@ -24,7 +24,7 @@ index:
     uv run papers index
 
 download venue="" year="":
-    uv run python -c "import subprocess; cmd = ['uv', 'run', 'papers', 'download']; cmd += ['--venue', '{{venue}}'] if '{{venue}}' else []; cmd += ['--year', '{{year}}'] if '{{year}}' else []; subprocess.run(cmd)"
+    uv run python scripts/download.py --venue "{{ venue }}" --year "{{ year }}"
 
 publish:
     uv run python scripts/publish.py
@@ -33,4 +33,3 @@ clean:
     rm -rf .ruff_cache/ .pytest_cache/ .mypy_cache/ build/ dist/ *.egg-info/ .coverage htmlcov/
     find . -path ./.venv -prune -o -type d -name "__pycache__" -exec rm -rf {} +
     find . -path ./.venv -prune -o -type f -name "*.py[cod]" -exec rm -f {} +
-

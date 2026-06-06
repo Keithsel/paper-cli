@@ -39,9 +39,11 @@ class ACLCrawler(Crawler):
 
     def _author_name(self, name_spec) -> str:
         try:
-            return str(self.anthology.resolve(name_spec).name)
+            name = self.anthology.resolve(name_spec).name
         except Exception:
-            return str(name_spec.name)
+            name = name_spec.name
+        parts = [name.first, name.last]
+        return " ".join(p for p in parts if p)
 
     def fetch(self, venue: str, year: int) -> Iterator[Paper]:
         event_id = EVENT_IDS.get((venue, year))
