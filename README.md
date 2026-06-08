@@ -43,6 +43,8 @@ The CLI crawls and indexes key publications from the [Cannot-Miss-AI-Conferences
 - ACL Anthology: `ACL`, `EMNLP`, `NAACL`
 - CVF: `CVPR`, `ICCV`, `WACV`
 - OpenReview: `NeurIPS`, `ICML`, `ICLR`
+- ECVA: `ECCV`
+- ISCA: `Interspeech`
 
 List registered venues:
 
@@ -217,13 +219,13 @@ Tracked status of crawler implementations against the [Cannot-Miss-AI-Conference
   - [x] 2025
   - [x] 2024
   - [x] 2023
-- [ ] **AAAI**
-  - [ ] 2026
-  - [ ] 2025
-  - [ ] 2024
-  - [ ] 2023
+- [x] **AAAI**
+  - [x] 2026
+  - [x] 2025
+  - [x] 2024
+  - [x] 2023
 - [x] **IJCAI**
-  - [ ] 2026
+  - [ ] 2026 (Not yet, August 2026)
   - [x] 2025
   - [x] 2024
   - [x] 2023
@@ -235,8 +237,10 @@ Tracked status of crawler implementations against the [Cannot-Miss-AI-Conference
 - [x] **ICCV**
   - [x] 2025
   - [x] 2023
-- [ ] **ECCV**
-  - [ ] 2024
+- [x] **ECCV**
+  - [x] 2024
+  - [x] 2022
+  - [x] 2020
 - [x] **WACV**
   - [x] 2026
   - [x] 2025
@@ -251,15 +255,15 @@ Tracked status of crawler implementations against the [Cannot-Miss-AI-Conference
   - [x] 2024
   - [x] 2023
 - [x] **NAACL**
-  - [ ] 2026 (combined with ACL)
+  - [ ] 2026 (Not yet, July 2026)
   - [x] 2025
   - [x] 2024
   - [ ] 2023 (combined with ACL)
-- [ ] **Interspeech**
-  - [ ] 2025
-  - [ ] 2024
-  - [ ] 2023
-- [ ] **ICASSP**
+- [x] **Interspeech**
+  - [x] 2025
+  - [x] 2024
+  - [x] 2023
+- [ ] **ICASSP** (Deferred, IEEE)
   - [ ] 2026
   - [ ] 2024
 
@@ -271,7 +275,7 @@ Tracked status of crawler implementations against the [Cannot-Miss-AI-Conference
   - [x] 2024
   - [x] 2023
   - [x] 2022
-- [ ] **TPAMI** (not fully open)
-- [ ] **ACM MM**
+- [ ] **TPAMI** (Deferred, IEEE)
+- [ ] **ACM MM** (Deferred, paywalled, blocks crawlers without official API registration)
   - [ ] 2025
   - [ ] 2024
