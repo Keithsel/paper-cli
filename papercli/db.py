@@ -64,7 +64,9 @@ class Store:
             return 0
         cols = list(rows[0].keys())
         placeholders = ", ".join(f":{c}" for c in cols)
-        updates = ", ".join(f"{c}=excluded.{c}" for c in cols if c != "id")
+        updates = ", ".join(
+            f"{c}=excluded.{c}" for c in cols if c not in ("id", "pdf_path")
+        )
         sql = (
             f"INSERT INTO papers ({', '.join(cols)}) VALUES ({placeholders}) "
             f"ON CONFLICT(id) DO UPDATE SET {updates}"
@@ -114,7 +116,8 @@ class Store:
                 venue,
                 year,
                 COUNT(*) as count,
-                SUM(CASE WHEN pdf_path IS NOT NULL AND pdf_path != '' THEN 1 ELSE 0 END) as local_count,
+                SUM(CASE WHEN pdf_path IS NOT NULL AND pdf_path != '' AND pdf_path NOT LIKE 'hf://%' THEN 1 ELSE 0 END) as local_count,
+                SUM(CASE WHEN pdf_path LIKE 'hf://%' THEN 1 ELSE 0 END) as hf_count,
                 SUM(CASE WHEN (pdf_path IS NULL OR pdf_path = '') AND pdf_url IS NOT NULL AND pdf_url != '' THEN 1 ELSE 0 END) as to_download_count
             FROM papers
             GROUP BY venue, year

@@ -19,6 +19,21 @@ class Crawler(ABC):
     def supported_venue_years(self) -> list[tuple[str, int]]:
         return []
 
+    @property
+    def base_url(self) -> str:
+        cname = self.name.lower()
+        mapping = {
+            "aaai": "https://ojs.aaai.org",
+            "acl": "https://aclanthology.org",
+            "cvf": "https://openaccess.thecvf.com",
+            "ecva": "https://www.ecva.net",
+            "ijcai": "https://www.ijcai.org",
+            "isca": "https://www.isca-archive.org",
+            "jmlr": "https://jmlr.org",
+            "openreview": "https://openreview.net",
+        }
+        return mapping.get(cname, "")
+
 
 T = TypeVar("T", bound="Crawler")
 
@@ -37,6 +52,16 @@ def get_crawler(venue: str) -> Crawler:
     return crawler
 
 
+def _venue_year_key(vy: tuple[str, int]) -> tuple[str, str, int]:
+    venue, year = vy
+    try:
+        crawler = get_crawler(venue)
+        cname = crawler.name.lower()
+    except KeyError:
+        cname = venue.lower()
+    return (cname, venue.lower(), year)
+
+
 def all_supported_venue_years() -> list[tuple[str, int]]:
     out: list[tuple[str, int]] = []
     seen: set[int] = set()
@@ -44,4 +69,4 @@ def all_supported_venue_years() -> list[tuple[str, int]]:
         if id(crawler) not in seen:
             seen.add(id(crawler))
             out.extend(crawler.supported_venue_years)
-    return sorted(out, key=lambda vy: (vy[0].lower(), vy[1]))
+    return sorted(out, key=_venue_year_key)

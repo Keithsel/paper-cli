@@ -26,6 +26,12 @@ venue-years:
 index:
     uv run papers index
 
+reindex:
+    uv run papers index --reindex
+
+sync-hf:
+    uv run papers sync-hf
+
 download venue="" year="":
     uv run python scripts/download.py --venue "{{ venue }}" --year "{{ year }}"
 

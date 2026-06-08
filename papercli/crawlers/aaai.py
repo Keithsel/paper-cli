@@ -85,7 +85,7 @@ class AAAICrawler(Crawler):
             title_el = art.css_first("h3.title a")
             if title_el is None:
                 continue
-            title = (title_el.text() or "").strip()
+            title = " ".join((title_el.text() or "").split())
             forum_url = title_el.attributes.get("href", "") or ""
 
             authors_el = art.css_first("div.authors")
